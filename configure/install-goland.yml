@@ -1,0 +1,28 @@
+---
+- name: download GoLand tar.gz
+  ansible.builtin.get_url:
+    url: "{{ golandDownloadURL }}"
+    dest: "/opt/{{ golandTarName }}"
+
+- name: untar GoLand
+  ansible.builtin.unarchive:
+    src: "/opt/{{ golandTarName }}"
+    dest: "/opt/"
+    remote_src: yes 
+
+- name: find GoLand start script
+  ansible.builtin.find:
+    path: "/opt/"
+    patterns: 'goland.sh'
+    recurse: yes
+  register: golandStart
+
+- debug:
+    msg: "{{ golandStart }}"
+
+- name: create alias for GoLand
+  ansible.builtin.lineinfile:
+    path: "/etc/profile.d/{{ golandAlias }}"
+    line: alias goland="{{ item.path }}"
+    create: yes
+  loop: "{{ golandStart.files }}"

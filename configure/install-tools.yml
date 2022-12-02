@@ -1,0 +1,59 @@
+---
+- name: create tools directory if it does not exist
+  ansible.builtin.file:
+    path: "{{ toolsPath }}"
+    state: directory
+
+- name: download all tools
+  ansible.builtin.get_url:
+    url: "{{ item }}"
+    dest: "{{ toolsPath }}"
+  loop: "{{ devTools }}"
+
+- name: find all tar.gz files
+  ansible.builtin.find:
+    path: "{{ toolsPath }}"
+    patterns: '*.tar.gz'
+  register: filesToUntar
+
+- name: untar all tar.gz files
+  ansible.builtin.unarchive:
+    src: "{{ item.path }}"
+    dest: "{{ toolsPath }}"
+    remote_src: yes
+  loop: "{{ filesToUntar.files }}"
+  
+- name: delete all tar.gz files
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ filesToUntar.files }}"
+
+- name: get all files
+  ansible.builtin.find:
+    path: "{{ toolsPath }}"
+  register: allToolsFiles
+
+- name: give exec permissions to all tools
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    owner: root
+    group: root
+    mode: '0755'
+  loop: "{{ allToolsFiles.files }}"
+
+- name: rename all files to remove suffix if exists
+  ansible.builtin.shell: | 
+    mv {{ item.path }} {{ item.path | regex_search('.+?(?=(-|_)linux(-|_)amd64)') }}
+  loop: "{{ allToolsFiles.files }}"
+  ignore_errors: true
+
+- name: get all files
+  ansible.builtin.find:
+    path: "{{ toolsPath }}"
+  register: allToolsFiles
+
+- name: copy tools to /usr/local/bin
+  ansible.builtin.shell: |
+    cp {{ item.path }} /usr/local/bin
+  loop: "{{ allToolsFiles.files }}"

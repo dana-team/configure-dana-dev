@@ -1,0 +1,9 @@
+---
+- name: configure dev vms
+  hosts: dana-dev-vms
+  become: true
+  tasks:
+   - ansible.builtin.include: configure/install-repos.yml
+   - ansible.builtin.include: configure/install-packages.yml
+   - ansible.builtin.include: configure/install-goland.yml
+   - ansible.builtin.include: configure/install-tools.yml

@@ -1,0 +1,22 @@
+---
+- name: register vm using credentials
+  community.general.redhat_subscription:
+    state: present
+    username: "{{ rhUsername }}"
+    password: "{{ rhPassword }}"
+    pool_ids: "{{ rhPool }}"
+    force_register: true
+
+- name: install epel repository
+  ansible.builtin.dnf:
+    name: "{{ epelRepo }}"
+    state: present
+
+- name: enable the the repositories required by OpenShift Container Platform
+  ansible.builtin.shell: | 
+    subscription-manager repos --enable={{ ocpRepo }}
+
+- name: install key and repository for vscode
+  ansible.builtin.shell: |
+    rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
