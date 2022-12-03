@@ -26,6 +26,7 @@ rhRepos:
   - rhocp-4.10-for-rhel-8-x86_64-rpms
   - codeready-builder-for-rhel-8-x86_64-rpms
 epelRepo: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+epelRepoKey: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8
 vscodeRepo: /etc/yum.repos.d/vscode.repo
 
 # packages

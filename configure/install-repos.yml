@@ -7,6 +7,11 @@
     pool_ids: "{{ rhPool }}"
     force_register: true
 
+- name: install epel RPM key
+  rpm_key:
+    state: present
+    key: "{{ epelRepoKey }}"
+
 - name: install epel repository
   ansible.builtin.dnf:
     name: "{{ epelRepo }}"
