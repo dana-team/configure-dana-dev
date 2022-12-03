@@ -17,7 +17,7 @@ ansible [core 2.13.3]
   jinja version = 3.1.2
   libyaml = True
 ```
-- A Virtual Machine (on `Azure` for example) with OS Disk space of `128GB`. Note it may be needed to extend the root partition for the playbook to run successfully, [as explained here](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/expand-disks?tabs=azure-cli%2Crhellvm#increase-the-size-of-the-os-disk).
+- A Virtual Machine (on `Azure` for example) with OS Disk space of `256GB`. Note it may be needed to extend the root partition for the playbook to run successfully, [as explained here](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/expand-disks?tabs=azure-cli%2Crhellvm#increase-the-size-of-the-os-disk).
 - SSH passwords to the VMs you'd like to configure.
 
 ## Steps
