@@ -22,8 +22,11 @@ rhPool: !vault |
           36366334356366356535353436636663666564386466316136343564396566373566323230616539
           3833383537373262383866353435623039643962356133633335
 
-ocpRepo: rhocp-4.10-for-rhel-8-x86_64-rpms
+rhRepos: 
+  - rhocp-4.10-for-rhel-8-x86_64-rpms
+  - codeready-builder-for-rhel-8-x86_64-rpms
 epelRepo: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+vscodeRepo: /etc/yum.repos.d/vscode.repo
 
 # packages
 dnfPackages:

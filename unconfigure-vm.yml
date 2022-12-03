@@ -1,0 +1,9 @@
+---
+- name: unconfigure dev vms
+  hosts: dana-dev-vms
+  become: true
+  tasks:
+   - ansible.builtin.include_tasks: unconfigure/uninstall-packages.yml
+   - ansible.builtin.include_tasks: unconfigure/uninstall-goland.yml
+   - ansible.builtin.include_tasks: unconfigure/uninstall-tools.yml
+   - ansible.builtin.include_tasks: unconfigure/uninstall-repos.yml

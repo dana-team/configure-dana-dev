@@ -1,0 +1,31 @@
+---
+- name: uninstall epel repository
+  ansible.builtin.dnf:
+    name: "epel"
+    state: absent
+
+- name: find all epel.repo files
+  ansible.builtin.find:
+    path: "/etc/yum.repos.d"
+    patterns: 'epel*'
+  register: epelFiles
+
+- name: delete all epel.repo files
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ epelFiles.files }}"
+
+- name: disable Red Hat repositories
+  ansible.builtin.shell: | 
+    subscription-manager repos --disable="{{ item }}"
+  loop: "{{ rhRepos }}"
+  
+- name: install key and repository for vscode
+  ansible.builtin.file:
+    path: "{{ vscodeRepo }}"
+    state: absent
+
+- name: unregister vm using credentials
+  community.general.redhat_subscription:
+    state: absent

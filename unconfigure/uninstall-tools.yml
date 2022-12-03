@@ -1,0 +1,14 @@
+- name: get all tools files
+  ansible.builtin.find:
+    path: "{{ toolsPath }}"
+  register: allToolsFiles
+
+- name: delete tools from /usr/local/bin
+  ansible.builtin.shell: |
+    rm /usr/local/bin/{{ item.path | basename }}
+  loop: "{{ allToolsFiles.files }}"
+
+- name: delete tools directory
+  ansible.builtin.file:
+    path: "{{ toolsPath }}"
+    state: absent

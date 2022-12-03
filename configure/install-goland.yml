@@ -17,12 +17,14 @@
     recurse: yes
   register: golandStart
 
-- debug:
-    msg: "{{ golandStart }}"
-
 - name: create alias for GoLand
   ansible.builtin.lineinfile:
     path: "/etc/profile.d/{{ golandAlias }}"
     line: alias goland="{{ item.path }}"
     create: yes
   loop: "{{ golandStart.files }}"
+
+- name: delete GoLand tar.gz
+  ansible.builtin.file:
+    path: "/opt/{{ golandTarName }}"
+    state: absent

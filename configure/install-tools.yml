@@ -48,7 +48,7 @@
   loop: "{{ allToolsFiles.files }}"
   ignore_errors: true
 
-- name: get all files
+- name: get all tools files
   ansible.builtin.find:
     path: "{{ toolsPath }}"
   register: allToolsFiles

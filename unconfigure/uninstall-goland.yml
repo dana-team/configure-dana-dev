@@ -1,0 +1,18 @@
+---
+- name: find GoLand directory
+  ansible.builtin.find:
+    path: "/opt/"
+    patterns: 'GoLand*'
+    file_type: directory
+  register: golandDir
+
+- name: delete GoLand tar.gz
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ golandDir.files }}"
+
+- name: delete alias for GoLand
+  ansible.builtin.file:
+    path: "/etc/profile.d/{{ golandAlias }}"
+    state: absent

@@ -1,0 +1,6 @@
+---
+- name: uninstall packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ dnfPackages }}"
