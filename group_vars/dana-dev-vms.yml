@@ -40,6 +40,7 @@ dnfPackages:
   - mesa-libEGL       # needed for graphic environment
   - mesa-dri-drivers  # needed for graphic environment
   - openshift-clients # installs oc and kubectl
+  - git
   - golang
   - make
   - code
