@@ -7,3 +7,4 @@
    - ansible.builtin.include_tasks: configure/install-packages.yml
    - ansible.builtin.include_tasks: configure/install-goland.yml
    - ansible.builtin.include_tasks: configure/install-tools.yml
+   - ansible.builtin.include_tasks: configure/install-golang.yml

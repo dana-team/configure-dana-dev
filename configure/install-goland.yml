@@ -17,6 +17,11 @@
     recurse: yes
   register: golandStart
 
+- name: delete alias for GoLand if exists
+  ansible.builtin.file:
+    path: "/etc/profile.d/{{ golandAlias }}"
+    state: absent
+
 - name: create alias for GoLand
   ansible.builtin.lineinfile:
     path: "/etc/profile.d/{{ golandAlias }}"

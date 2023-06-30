@@ -1,0 +1,40 @@
+---
+- name: delete golang directory if it exists
+  ansible.builtin.file:
+    path: "{{ golangPath }}/go"
+    state: absent
+
+- name: download golang
+  ansible.builtin.get_url:
+    url: "{{ golangDownloadURL }}"
+    dest: "{{ toolsPath }}"
+
+- name: find all tar.gz files
+  ansible.builtin.find:
+    path: "{{ toolsPath }}"
+    patterns: '*.tar.gz'
+  register: filesToUntar
+
+- name: untar all tar.gz files
+  ansible.builtin.unarchive:
+    src: "{{ item.path }}"
+    dest: "{{ golangPath }}"
+    remote_src: yes
+  loop: "{{ filesToUntar.files }}"
+  
+- name: delete all tar.gz files
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ filesToUntar.files }}"
+
+- name: delete golang from path if exists
+  ansible.builtin.file:
+    path: "/etc/profile.d/{{ golangProfilePath }}"
+    state: absent
+
+- name: add golang to path
+  ansible.builtin.lineinfile:
+    path: "/etc/profile.d/{{ golangProfilePath }}"
+    line: export PATH="{{ golangPath }}/go/bin:$PATH"
+    create: yes
