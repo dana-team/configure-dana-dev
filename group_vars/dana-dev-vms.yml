@@ -15,15 +15,15 @@ rhPassword: !vault |
           6662
 rhPool: !vault |
           $ANSIBLE_VAULT;1.1;AES256
-          30353761343264383236333663653636303136316339336565333266613038653366646566366461
-          3563333734646337326164303534333536613139343031380a303465663138356136316430383139
-          37386465666532386336346236346266373161663333666633643830316366386439383235626236
-          6635353062313032660a383733363833393531383562663761356432393966343739333735313533
-          65323731306438343730306163643133653837376465656430663536653066386637316138613336
-          6163383935666163613166646136633062373061656461666135
+          64386265376436666133316564383530386639303936393435346662633465363063363235646266
+          3834316361396636313232343264356238333532346232360a386439333865633861333638623562
+          65343766386666333134613864343537636162333261646265613430653033393837656232343435
+          3164663939366533320a383833333263353833383434323165653362333930646165353936303464
+          62613737626262343037336234656133303236623736393337633562376563383736363331373361
+          3330663139323730613864663533343532316533656436313935
 
 rhRepos: 
-  - rhocp-4.13-for-rhel-8-x86_64-rpms
+  - rhocp-4.14-for-rhel-8-x86_64-rpms
   - codeready-builder-for-rhel-8-x86_64-rpms
 epelRepo: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 epelRepoKey: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8
@@ -43,25 +43,30 @@ dnfPackages:
   - git
   - make
   - code
-  - podman
-  - podman-docker
+  - bash-completion
+  # - podman
+  # - podman-docker
 
 # tools
 devTools:
-  - https://github.com/operator-framework/operator-sdk/releases/download/v1.30.0/operator-sdk_linux_amd64 # operator-sdk
-  - https://github.com/kubernetes-sigs/kubebuilder/releases/download/v3.11.0/kubebuilder_linux_amd64      # kubebuilder
+  - https://github.com/operator-framework/operator-sdk/releases/download/v1.33.0/operator-sdk_linux_amd64 # operator-sdk
+  - https://github.com/kubernetes-sigs/kubebuilder/releases/download/v3.13.0/kubebuilder_linux_amd64      # kubebuilder
   - https://mirror.openshift.com/pub/openshift-v4/clients/helm/latest/helm-linux-amd64.tar.gz             # helm
   - https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/opm-linux.tar.gz              # opm
   - https://mirror.openshift.com/pub/openshift-v4/clients/serverless/latest/kn-linux-amd64.tar.gz         # kn
   - https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/oc-mirror.tar.gz              # oc mirror
-  - https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.0.0/kustomize_v5.0.0_linux_amd64.tar.gz # kustomzie
+  - https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.3.0/kustomize_v5.3.0_linux_amd64.tar.gz # kustomzie
+  - https://github.com/arttor/helmify/releases/download/v0.4.10/helmify_Linux_x86_64.tar.gz               # helmify
 
 toolsPath: /opt/tools
-golangDownloadURL: https://go.dev/dl/go1.20.5.linux-amd64.tar.gz
+golangDownloadURL: https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
 golangPath: /usr/local
 golangProfilePath: dana-golang.sh
 
 # goland
-golandDownloadURL: https://download-cdn.jetbrains.com/go/goland-2023.1.3.tar.gz
-golandTarName: goland-2023.1.3.tar.gz
+golandDownloadURL: https://download-cdn.jetbrains.com/go/goland-2023.3.2.tar.gz
+golandTarName: goland-2023.3.2.tar.gz
 golandAlias: dana-goland-alias.sh
+
+# kubectl
+kubectlProfilePath: dana-kubectl-alias.sh
