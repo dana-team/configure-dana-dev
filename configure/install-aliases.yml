@@ -1,0 +1,38 @@
+---
+- name: delete kubectl and oc auto-complete if exists
+  ansible.builtin.file:
+    path: "/etc/profile.d/{{ kubectlProfilePath }}"
+    state: absent
+
+- name: enable kubectl and oc auto-complete
+  ansible.builtin.blockinfile:
+    path: "/etc/profile.d/{{ kubectlProfilePath }}"
+    block: |
+      source <(kubectl completion bash)
+      source <(oc completion bash)
+      alias k=kubectl
+      complete -o default -F __start_kubectl k
+    create: yes
+
+- name: create prompts directory if it does not exist
+  ansible.builtin.file:
+    path: "{{ promptsPath }}"
+    state: directory  
+
+- name: get kube-ps1 script
+  ansible.builtin.get_url:
+    url: "{{ kubePs1URL }}"
+    dest: "{{ promptsPath }}/kube-ps1.sh"
+
+- name: delete kube-ps1 if exists
+  ansible.builtin.file:
+    path: "/etc/profile.d/{{ kubePs1ProfilePath }}"
+    state: absent
+
+- name: enable kube-ps1
+  ansible.builtin.blockinfile:
+    path: "/etc/profile.d/{{ kubePs1ProfilePath }}"
+    block: |
+      source {{ promptsPath }}/kube-ps1.sh
+      PS1='[\u@\h \W $(kube_ps1)]\$ '
+    create: yes

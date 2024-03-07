@@ -5,6 +5,7 @@
   tasks:
    - ansible.builtin.include_tasks: configure/install-repos.yml
    - ansible.builtin.include_tasks: configure/install-packages.yml
+   - ansible.builtin.include_tasks: configure/install-aliases.yml
    - ansible.builtin.include_tasks: configure/install-goland.yml
    - ansible.builtin.include_tasks: configure/install-tools.yml
    - ansible.builtin.include_tasks: configure/install-golang.yml

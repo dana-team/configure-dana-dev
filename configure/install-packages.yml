@@ -4,18 +4,3 @@
     name: "{{ item }}"
     state: latest
   loop: "{{ dnfPackages }}"
-
-- name: delete kubectl and oc auto-complete if exists
-  ansible.builtin.file:
-    path: "/etc/profile.d/{{ kubectlProfilePath }}"
-    state: absent
-
-- name: enable kubectl and oc auto-complete
-  ansible.builtin.blockinfile:
-    path: "/etc/profile.d/{{ kubectlProfilePath }}"
-    block: |
-      source <(kubectl completion bash)
-      source <(oc completion bash)
-      alias k=kubectl
-      complete -o default -F __start_kubectl k
-    create: yes

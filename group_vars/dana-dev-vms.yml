@@ -69,4 +69,7 @@ golandTarName: goland-2023.3.2.tar.gz
 golandAlias: dana-goland-alias.sh
 
 # kubectl
+promptsPath: /opt/prompts
 kubectlProfilePath: dana-kubectl-alias.sh
+kubePs1URL: https://raw.githubusercontent.com/jonmosco/kube-ps1/master/kube-ps1.sh
+kubePs1ProfilePath: dana-kube-ps1.sh
