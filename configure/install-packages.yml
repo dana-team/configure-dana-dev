@@ -4,3 +4,4 @@
     name: "{{ item }}"
     state: latest
   loop: "{{ dnfPackages }}"
+  ignore_errors: true
