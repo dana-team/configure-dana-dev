@@ -67,7 +67,7 @@ devTools:
   - https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_x86_64.tar.gz          # kubens
   - https://github.com/kubernetes-sigs/kind/releases/download/v0.22.0/kind-linux-amd64                    # kind
   - https://cli.upbound.io/stable/v0.28.0/bin/linux_amd64/up                                              # up
-  - https://releases.crossplane.io/stable/v1.15.2/bin/linux_amd64/crossplane                              # crossplane
+  - https://releases.crossplane.io/stable/v1.15.2/bin/linux_amd64/crank                                   # crossplane
 
 toolsPath: /opt/tools
 golangDownloadURL: https://go.dev/dl/go1.22.2.linux-amd64.tar.gz
@@ -96,3 +96,7 @@ dockerPackages:
 
 # sysctl
 sysctlPath: /etc/sysctl.conf
+
+# crossplane
+crossplaneCLIOriginalName: crank
+crossplaneCLINewName: crossplane

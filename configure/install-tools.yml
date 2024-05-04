@@ -10,6 +10,10 @@
     dest: "{{ toolsPath }}"
   loop: "{{ devTools }}"
 
+- name: rename crossplane cli if it exists
+  ansible.builtin.shell: | 
+    mv {{ toolsPath }}/{{ crossplaneCLIOriginalName }} {{ toolsPath }}/{{ crossplaneCLINewName }}
+
 - name: find all tar.gz files
   ansible.builtin.find:
     path: "{{ toolsPath }}"
