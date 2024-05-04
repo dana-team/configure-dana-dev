@@ -1,9 +1,4 @@
 ---
-- name: delete kubectl and oc auto-complete if exists
-  ansible.builtin.file:
-    path: "/etc/profile.d/{{ kubectlProfilePath }}"
-    state: absent
-
 - name: enable kubectl and oc auto-complete
   ansible.builtin.blockinfile:
     path: "/etc/profile.d/{{ kubectlProfilePath }}"
@@ -23,11 +18,6 @@
   ansible.builtin.get_url:
     url: "{{ kubePs1URL }}"
     dest: "{{ promptsPath }}/kube-ps1.sh"
-
-- name: delete kube-ps1 if exists
-  ansible.builtin.file:
-    path: "/etc/profile.d/{{ kubePs1ProfilePath }}"
-    state: absent
 
 - name: enable kube-ps1
   ansible.builtin.blockinfile:

@@ -1,0 +1,7 @@
+- name: modify inotify resources
+  ansible.builtin.blockinfile:
+    path: "{{ sysctlPath }}"
+    create: true
+    block: |
+      fs.inotify.max_user_watches = 524288
+      fs.inotify.max_user_instances = 512

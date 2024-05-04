@@ -1,0 +1,27 @@
+---
+- name: add docker repository
+  ansible.builtin.command: dnf config-manager --add-repo "{{ dockerRepo }}"
+    
+- name: install docker packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ dockerPackages }}"
+  ignore_errors: true
+
+- name: start and enable docker
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+    enabled: yes
+
+- name: ensure group docker exists
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: add user and append to docker group
+  ansible.builtin.user:
+    name: "{{ baseUser }}"
+    groups: docker
+    append: yes

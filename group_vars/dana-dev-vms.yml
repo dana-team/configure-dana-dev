@@ -1,3 +1,5 @@
+baseUser: dana
+
 # repos
 rhUsername: !vault |
           $ANSIBLE_VAULT;1.1;AES256
@@ -23,30 +25,31 @@ rhPool: !vault |
           3330663139323730613864663533343532316533656436313935
 
 rhRepos: 
-  - rhocp-4.14-for-rhel-8-x86_64-rpms
-  - codeready-builder-for-rhel-8-x86_64-rpms
-epelRepo: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-epelRepoKey: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8
+  - rhocp-4.14-for-rhel-9-x86_64-rpms
+  - codeready-builder-for-rhel-9-x86_64-rpms
+epelRepo: https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+epelRepoKey: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
 vscodeRepo: /etc/yum.repos.d/vscode.repo
 
 # packages
 dnfPackages:
   - xauth             # needed for graphic environment
-  - xorg-x11-apps     # needed for graphic environment
+  - xorg-x11-xauth    # needed for graphic environment
+  - xorg-x11-utils    # needed for graphic environment
+  - dbus-x11          # needed for graphic environment
   - ncurses-devel     # needed for graphic environment
   - bc                # needed for graphic environment
   - java              # needed for graphic environment
   - libGLEW           # needed for graphic environment
   - mesa-libEGL       # needed for graphic environment
   - mesa-dri-drivers  # needed for graphic environment
+  - dnf-plugins-core
   - openshift-clients # installs oc and kubectl
   - git
   - make
   - code
   - bash-completion
-  - python38
-  # - podman
-  # - podman-docker
+  - python3.12
 
 # tools
 devTools:
@@ -60,12 +63,13 @@ devTools:
   - https://github.com/arttor/helmify/releases/download/v0.4.12/helmify_Linux_x86_64.tar.gz               # helmify
   - https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubectx_v0.9.5_linux_x86_64.tar.gz         # kubectx
   - https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_x86_64.tar.gz          # kubens
-  - https://github.com/kubernetes-sigs/kind/releases/download/v0.18.0/kind-linux-amd64                    # kind
+  - https://github.com/kubernetes-sigs/kind/releases/download/v0.22.0/kind-linux-amd64                    # kind
   - https://cli.upbound.io/stable/v0.28.0/bin/linux_amd64/up                                              # up
   - https://releases.crossplane.io/stable/v1.15.2/bin/linux_amd64/crossplane                              # crossplane
+  - https://github.com/cli/cli/releases/download/v2.49.0/gh_2.49.0_linux_amd64.tar.gz                     # gh
 
 toolsPath: /opt/tools
-golangDownloadURL: https://go.dev/dl/go1.21.6.linux-amd64.tar.gz
+golangDownloadURL: https://go.dev/dl/go1.22.2.linux-amd64.tar.gz
 golangPath: /usr/local
 golangProfilePath: dana-golang.sh
 
@@ -79,3 +83,15 @@ promptsPath: /opt/prompts
 kubectlProfilePath: dana-kubectl-alias.sh
 kubePs1URL: https://raw.githubusercontent.com/jonmosco/kube-ps1/master/kube-ps1.sh
 kubePs1ProfilePath: dana-kube-ps1.sh
+
+# docker
+dockerRepo: https://download.docker.com/linux/centos/docker-ce.repo
+dockerPackages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+
+# sysctl
+sysctlPath: /etc/sysctl.conf
