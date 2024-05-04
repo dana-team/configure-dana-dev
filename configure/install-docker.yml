@@ -1,7 +1,4 @@
 ---
-- name: add docker repository
-  ansible.builtin.command: dnf config-manager --add-repo "{{ dockerRepo }}"
-    
 - name: install docker packages
   ansible.builtin.dnf:
     name: "{{ item }}"

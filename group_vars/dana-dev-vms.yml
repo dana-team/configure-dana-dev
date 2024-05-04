@@ -30,6 +30,7 @@ rhRepos:
 epelRepo: https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 epelRepoKey: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
 vscodeRepo: /etc/yum.repos.d/vscode.repo
+githubRepo: https://cli.github.com/packages/rpm/gh-cli.repo
 
 # packages
 dnfPackages:
@@ -46,6 +47,7 @@ dnfPackages:
   - dnf-plugins-core
   - openshift-clients # installs oc and kubectl
   - git
+  - gh
   - make
   - code
   - bash-completion
@@ -66,7 +68,6 @@ devTools:
   - https://github.com/kubernetes-sigs/kind/releases/download/v0.22.0/kind-linux-amd64                    # kind
   - https://cli.upbound.io/stable/v0.28.0/bin/linux_amd64/up                                              # up
   - https://releases.crossplane.io/stable/v1.15.2/bin/linux_amd64/crossplane                              # crossplane
-  - https://github.com/cli/cli/releases/download/v2.49.0/gh_2.49.0_linux_amd64.tar.gz                     # gh
 
 toolsPath: /opt/tools
 golangDownloadURL: https://go.dev/dl/go1.22.2.linux-amd64.tar.gz
