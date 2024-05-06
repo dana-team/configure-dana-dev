@@ -52,6 +52,7 @@ dnfPackages:
   - code
   - bash-completion
   - python3.12
+  - fzf
 
 # tools
 devTools:
