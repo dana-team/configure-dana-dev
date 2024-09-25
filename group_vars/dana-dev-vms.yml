@@ -52,6 +52,7 @@ dnfPackages:
   - code
   - bash-completion
   - python3.12
+  - fzf
 
 # tools
 devTools:
@@ -68,9 +69,10 @@ devTools:
   - https://github.com/kubernetes-sigs/kind/releases/download/v0.22.0/kind-linux-amd64                    # kind
   - https://cli.upbound.io/stable/v0.28.0/bin/linux_amd64/up                                              # up
   - https://releases.crossplane.io/stable/v1.15.2/bin/linux_amd64/crank                                   # crossplane
+  - https://github.com/derailed/k9s/releases/download/v0.32.4/k9s_Linux_amd64.tar.gz                      # k9s
 
 toolsPath: /opt/tools
-golangDownloadURL: https://go.dev/dl/go1.22.2.linux-amd64.tar.gz
+golangDownloadURL: https://go.dev/dl/go1.22.7.linux-amd64.tar.gz
 golangPath: /usr/local
 golangProfilePath: dana-golang.sh
 
