@@ -72,7 +72,7 @@ devTools:
   - https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_Linux_amd64.tar.gz                                      # k9s
 
 toolsPath: /opt/tools
-golangDownloadURL: https://go.dev/dl/go1.22.7.linux-amd64.tar.gz
+golangDownloadURL: https://go.dev/dl/go1.23.4.linux-amd64.tar.gz
 golangPath: /usr/local
 golangProfilePath: dana-golang.sh
 
